@@ -4,9 +4,59 @@
     <head>
         <script type="text/javascript">
 
+            let ballPosition = [250, 250];
+            let ballVelocity = [0.0, 0.0];
+
             let acceleration = [0.0, 0.0, 0.0];
             let accelarationWithGravity = [0.0, 0.0, 0.0];
             let gravity = [0.0, 0.0, 0.0];
+
+            let lastTime = null;
+
+            function draw(time)
+            {
+                if (lastTime == null)
+                {
+                    lastTime = time;
+                }
+
+                let deltaTime = time - lastTime;
+                let deltaTimeSec = deltaTime / 1000.0;
+                lastTime = time;
+
+                let canvas = document.querySelector("canvas");
+                let context = canvas.getContext("2d");
+
+                canvas.width = 500;
+                canvas.height = 500;
+
+                //gravity[1] = 0.1;
+
+                pixelSizeInMeters = 1080 / 20;
+
+                ballVelocity[0] -= gravity[0] * deltaTimeSec;
+                ballVelocity[1] += gravity[1] * deltaTimeSec;
+
+                ballPosition[0] += ballVelocity[0] * deltaTimeSec * pixelSizeInMeters;
+                ballPosition[1] += ballVelocity[1] * deltaTimeSec * pixelSizeInMeters;
+
+                ballPosition[0] = Math.min(Math.max(ballPosition[0], 10), 490);
+                ballPosition[1] = Math.min(Math.max(ballPosition[1], 10), 490);
+
+                if (ballPosition[0] == 10 || ballPosition[0] == 490 || ballPosition[1] == 10 || ballPosition[1] == 490)
+                {
+                    ballVelocity[0] = 0.0;
+                    ballVelocity[1] = 0.0;
+                }
+
+                context.beginPath();
+                context.arc(ballPosition[0], ballPosition[1], 10, 0, 2.0 * Math.PI);
+                context.fillStyle = 'green';
+                context.fill();
+                context.stroke();
+
+                window.requestAnimationFrame(draw);
+            }
 
             window.addEventListener("devicemotion", function(e) {
                 console.log(e);
@@ -31,6 +81,12 @@
             });
 
             window.addEventListener("load", function() {
+
+                let canvas = document.querySelector("canvas");
+
+                canvas.width = 500;
+                canvas.height = 500;
+
                 setInterval(function() {
                     document.querySelector("#ax").innerText = "X: " + acceleration[0].toFixed(2);
                     document.querySelector("#ay").innerText = "Y: " + acceleration[1].toFixed(2);
@@ -43,7 +99,12 @@
                     document.querySelector("#x").innerText = "X: " + gravity[0].toFixed(2);
                     document.querySelector("#y").innerText = "Y: " + gravity[1].toFixed(2);
                     document.querySelector("#z").innerText = "Z: " + gravity[2].toFixed(2);
-                }, 500);
+
+                    document.querySelector("#vx").innerText = "Y: " + ballVelocity[0].toFixed(2);
+                    document.querySelector("#vy").innerText = "Z: " + ballVelocity[1].toFixed(2);
+                }, 100);
+
+                window.requestAnimationFrame(draw);
             });
 
         </script>
@@ -57,6 +118,12 @@
 
             div {
                 margin: 10px;
+            }
+
+            canvas {
+                border: 2px solid #000;
+                width: 500px;
+                height: 500px;
             }
         </style>
 
@@ -86,7 +153,15 @@
             <div id="z">
             </div>
         </div>
+        <div class="container">
+            <div id="vx">
+            </div>
+            <div id="vy">
+            </div>
+        </div>
         <div id="error">
         </div>
+        <canvas>
+        </canvas>
     </body>
 </html>

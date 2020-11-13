@@ -37,23 +37,53 @@
         </nav>
 
         <div class="container-fluid">
-            <h3>Widget Dashboard</h3>
-            <table class="table">
-                <tr>
-                    <td>
-                        <iframe src="../widget/index.html?id=abcdef123123123" style="width: 500px; height: 800px;"></iframe>
-                        <br/>
-                        <small><a href="#">Edit widget</a> | <a href="#">Delete widget</a></small>
-                    </td>
-                    <td>
-                        <iframe src="../widget/index.html?id=zxyqdnm098" style="width: 500px; height: 800px;"></iframe>
-                        <br/>
-                        <small><a href="#">Edit widget</a> | <a href="#">Delete widget</a></small>
-                    </td>
-                </tr>
-            </table>
+            <h3>New Widget</h3>
 
-            <a href="new-widget-configuration.html" class="btn btn-primary">New Widget</a>
+            <form action="index.html" method="GET">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            Category
+                        </td>
+                        <td>
+                            <select>
+                                <option>Interest Paying Current Accounts</option>
+                                <option>Easy Access Accounts</option>
+                                <option>Fixed Rate Bonds</option>
+                                <option>...</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Duration
+                        </td>
+                        <td>
+                            <select>
+                                <option>1 year</option>
+                                <option>2 year</option>
+                                <option>3 year</option>
+                                <option>4 year</option>
+                                <option>5 year</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Other options ....
+                        </td>
+                        <td>
+                            .......
+                        </td>
+                    </tr>
+
+                </table>
+
+                <button class="btn btn-primary">Save</button>
+                <button class="btn">Cancel</button>
+            </form>
         </div>
     </body>
 </html>

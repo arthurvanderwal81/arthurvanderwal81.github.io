@@ -6,7 +6,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        <title>Savings Champion Widget Dashboard | User Management</title>
+        <title>Savings Champion Widget Dashboard | Wiki</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
@@ -24,7 +24,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../data-automation/index.html">Data Automation</a>
-                    </li>                    
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../wiki/index.html">Wiki</a>
                     </li>
@@ -40,44 +40,64 @@
         </nav>
 
         <div class="container-fluid">
-            <h3>User Management</h3>
-
-            <p>This section is only visible to administrators</p>
+            <h3>Embedded confluence Wiki</h3>
 
             <table class="table table-striped">
                 <tr>
-                    <th>Email address</th>
-                    <th>Role</th>
-                    <th>Last login</th>
-                    <th>IP Address</th>
-                    <th># Widgets</th>
-                    <th></th>
-                    <th></th>
+                    <th>
+                        Filename
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                    </th>
                 </tr>
-
                 <tr>
-                    <td>warren@test.com</td>
-                    <td>Administrator</td>
-                    <td>Nov 13 2020, 12:00 AM</td>
-                    <td>127.0.0.1</td>
-                    <td>4</td>
-                    <td><button class="btn btn-primary">Edit</button></td>
-                    <td><button class="btn btn-danger">Delete</button></td>
+                    <td>
+                        <i>Data export 2020-11-13.csv</i>
+                    </td>
+                    <td>
+                        Success
+                    </td>
+                    <td>
+                        November 13, 12:00 AM
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Download</button>
+                    </td>
                 </tr>
-
                 <tr>
-                    <td>arthur@test.com</td>
-                    <td>User</td>
-                    <td>Nov 13 2020, 12:00 AM</td>
-                    <td>127.0.0.1</td>
-                    <td>2</td>
-                    <td><button class="btn btn-primary">Edit</button></td>
-                    <td><button class="btn btn-danger">Delete</button></td>
+                    <td>
+                        <i>Data export 2020-11-12.csv</i>
+                    </td>
+                    <td>
+                        Error - data not found
+                    </td>
+                    <td>
+                        November 12, 12:00 AM
+                    </td>
+                    <td>
+                    </td>
                 </tr>
-
+                <tr>
+                    <td>
+                        <i>Data export 2020-11-11.csv</i>
+                    </td>
+                    <td>
+                        Success
+                    </td>
+                    <td>
+                        November 11, 12:00 AM
+                    </td>
+                    <td>
+                        <button class="btn btn-primary">Download</button>
+                    </td>
+                </tr>
             </table>
-
-            <button class="btn btn-primary">New User</button>
         </div>
     </body>
 </html>

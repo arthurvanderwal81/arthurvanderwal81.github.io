@@ -40,7 +40,7 @@
                 let y = canvas.height * 0.5;
                 let width = image.width;
                 let height = image.height;
-                let angleInRadians = rotation[0] / 180.0 * Math.PI;
+                let angleInRadians = rotation[1] / 180.0 * Math.PI;
 
                 context.translate(x, y);
                 context.rotate(angleInRadians);
@@ -67,9 +67,9 @@
                     gravity[1] = e.accelerationIncludingGravity.y - e.acceleration.y;
                     gravity[2] = e.accelerationIncludingGravity.z - e.acceleration.z;
 
-                    rotation[0] += e.rotationRate.alpha - rotationCalibration[0];
-                    rotation[1] += e.rotationRate.beta -  rotationCalibration[1];
-                    rotation[2] += e.rotationRate.gamma - rotationCalibration[2];
+                    rotation[0] += e.rotationRate.alpha * e.interval - rotationCalibration[0];
+                    rotation[1] += e.rotationRate.beta * e.interval -  rotationCalibration[1];
+                    rotation[2] += e.rotationRate.gamma * e.interval - rotationCalibration[2];
                 }
                 catch (e)
                 {

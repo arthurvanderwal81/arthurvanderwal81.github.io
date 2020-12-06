@@ -16,6 +16,9 @@
 
             let lastTime = null;
 
+            const image = new Image(30, 392);
+            image.src = "img/falcon9.jpg";
+
             function draw(time)
             {
                 if (lastTime == null)
@@ -33,30 +36,17 @@
                 canvas.width = 500;
                 canvas.height = 500;
 
-                //gravity[1] = 0.1;
+                let x = canvas.width * 0.5;
+                let y = canvas.height * 0.5;
+                let width = image.width;
+                let height = image.height;
+                let angleInRadians = rotation[0] / 180.0 * Math.PI;
 
-                pixelSizeInMeters = 1080 / 20;
-
-                ballVelocity[0] -= gravity[0] * deltaTimeSec;
-                ballVelocity[1] += gravity[1] * deltaTimeSec;
-
-                ballPosition[0] += ballVelocity[0] * deltaTimeSec * pixelSizeInMeters;
-                ballPosition[1] += ballVelocity[1] * deltaTimeSec * pixelSizeInMeters;
-
-                ballPosition[0] = Math.min(Math.max(ballPosition[0], 10), 490);
-                ballPosition[1] = Math.min(Math.max(ballPosition[1], 10), 490);
-
-                if (ballPosition[0] == 10 || ballPosition[0] == 490 || ballPosition[1] == 10 || ballPosition[1] == 490)
-                {
-                    ballVelocity[0] = 0.0;
-                    ballVelocity[1] = 0.0;
-                }
-
-                context.beginPath();
-                context.arc(ballPosition[0], ballPosition[1], 10, 0, 2.0 * Math.PI);
-                context.fillStyle = 'green';
-                context.fill();
-                context.stroke();
+                context.translate(x, y);
+                context.rotate(angleInRadians);
+                context.drawImage(image, -width * 0.5, -height * 0.5, width, height);
+                context.rotate(-angleInRadians);
+                context.translate(-x, -y);
 
                 window.requestAnimationFrame(draw);
             }

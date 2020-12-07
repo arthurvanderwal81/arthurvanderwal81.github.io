@@ -10,6 +10,7 @@
 
             let acceleration = [0.0, 0.0, 0.0];
             let accelarationWithGravity = [0.0, 0.0, 0.0];
+            let accelerationDirection = [0.0, 0.0, 0.0];
             let accelerationSize = 0.0;
             let gravity = [0.0, 0.0, 0.0];
 
@@ -141,6 +142,24 @@
                     document.querySelector("#rx").innerText = "Xr: " + rotation[0].toFixed(2);
                     document.querySelector("#ry").innerText = "Yr: " + rotation[1].toFixed(2);
                     document.querySelector("#rz").innerText = "Zr: " + rotation[2].toFixed(2);
+
+
+                    let status = "unknown";
+
+                    if (accelerationSize <= 1.0)
+                    {
+                        status = "REST";
+                    }
+                    else if (accelerationDirection[1] > 0.0)
+                    {
+                        status = "MOVING UP";
+                    }
+                    else
+                    {
+                        status = "MOVING DOWN";
+                    }
+
+                    document.querySelector("#status").innerText = "STATUS: " + status;
                 }, 100);
 
                 window.requestAnimationFrame(draw);
@@ -203,7 +222,7 @@
             </div>
         </div>
         <div class="container">
-            Rotation version 1.5
+            Rotation version 1.4
             <div id="rx">
             </div>
             <div id="ry">
@@ -212,6 +231,8 @@
             </div>
         </div>
         <div id="error">
+        </div>
+        <div id="status">
         </div>
         <canvas>
         </canvas>

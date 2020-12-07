@@ -85,7 +85,7 @@
                     accelarationWithGravity[2] = e.accelerationIncludingGravity.z;
 
                     accelerationSizeWithGravity = Math.sqrt(accelarationWithGravity[0] * accelarationWithGravity[0] + accelarationWithGravity[1] * accelarationWithGravity[1] + accelarationWithGravity[2] * accelarationWithGravity[2]);
-                    accelerationSize = accelerationSizeWithGravity - 9.81;
+                    accelerationSize = Math.abs(accelerationSizeWithGravity - 9.81);
 
                     accelerationDirection[0] = accelarationWithGravity[0] / accelerationSizeWithGravity;
                     accelerationDirection[1] = accelarationWithGravity[1] / accelerationSizeWithGravity;
@@ -146,7 +146,7 @@
 
                     let status = "unknown";
 
-                    if (accelerationSize <= 1.0)
+                    if (accelerationSize <= 0.1)
                     {
                         status = "REST";
                     }

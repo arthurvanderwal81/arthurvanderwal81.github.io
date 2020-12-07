@@ -12,13 +12,31 @@
             let accelarationWithGravity = [0.0, 0.0, 0.0];
             let gravity = [0.0, 0.0, 0.0];
 
+            let rotationCalibrationSamples = 0;
             let rotationCalibration = [0.0, 0.0, 0.0];
             let rotation = [0.0, 0.0, 0.0];
 
             let lastTime = null;
 
+            let calibrateMode = false;
+
             const image = new Image(30, 392);
             image.src = "img/falcon9.jpg";
+
+            function calibrate()
+            {
+                calibrateMode = true;
+
+                setTimeout(function() {
+                    calibrateMode = false;
+
+                    rotationCalibration[0] /= rotationCalibrationSamples;
+                    rotationCalibration[1] /= rotationCalibrationSamples;
+                    rotationCalibration[2] /= rotationCalibrationSamples;
+
+                    alert("" + rotationCalibration[0] + " " + rotationCalibration[1] + " " + rotationCalibration[2]);
+                }, 10000);
+            }
 
             function draw(time)
             {
@@ -68,9 +86,20 @@
                     gravity[1] = e.accelerationIncludingGravity.y - e.acceleration.y;
                     gravity[2] = e.accelerationIncludingGravity.z - e.acceleration.z;
 
-                    rotation[0] += e.rotationRate.alpha * e.interval / 1000.0 - rotationCalibration[0];
-                    rotation[1] += e.rotationRate.beta * e.interval / 1000.0  - rotationCalibration[1];
-                    rotation[2] -= e.rotationRate.gamma * e.interval / 1000.0 - rotationCalibration[2];
+                    if (calibrateMode)
+                    {
+                        rotationCalibration[0] += e.rotationRate.alpha * e.interval;
+                        rotationCalibration[1] += e.rotationRate.beta * e.interval;
+                        rotationCalibration[2] += e.rotationRate.gamma * e.interval;
+
+                        rotationCalibrationSamples += 1;
+                    }
+                    else
+                    {
+                        rotation[0] += e.rotationRate.alpha * e.interval / 1000.0 - rotationCalibration[0];
+                        rotation[1] += e.rotationRate.beta * e.interval / 1000.0  - rotationCalibration[1];
+                        rotation[2] -= e.rotationRate.gamma * e.interval / 1000.0 - rotationCalibration[2];
+                    }
                 }
                 catch (e)
                 {
@@ -173,5 +202,6 @@
         </div>
         <canvas>
         </canvas>
+        <button onclick="calibrate();">Calibrate</button>
     </body>
 </html>

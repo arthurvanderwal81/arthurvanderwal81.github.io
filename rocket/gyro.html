@@ -87,9 +87,9 @@
                     accelerationSizeWithGravity = Math.sqrt(accelarationWithGravity[0] * accelarationWithGravity[0] + accelarationWithGravity[1] * accelarationWithGravity[1] + accelarationWithGravity[2] * accelarationWithGravity[2]);
                     accelerationSize = Math.abs(accelerationSizeWithGravity - 9.81);
 
-                    accelerationDirection[0] = accelarationWithGravity[0] / accelerationSizeWithGravity;
-                    accelerationDirection[1] = accelarationWithGravity[1] / accelerationSizeWithGravity;
-                    accelerationDirection[2] = accelarationWithGravity[2] / accelerationSizeWithGravity;
+                    accelerationDirection[0] = accelarationWithGravity[0];
+                    accelerationDirection[1] = accelarationWithGravity[1] - 9.81;
+                    accelerationDirection[2] = accelarationWithGravity[2];
 
                     gravity[0] = e.accelerationIncludingGravity.x - e.acceleration.x;
                     gravity[1] = e.accelerationIncludingGravity.y - e.acceleration.y;

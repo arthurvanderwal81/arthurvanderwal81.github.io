@@ -121,6 +121,7 @@
                     document.querySelector("#agx").innerText = "X: " + accelarationWithGravity[0].toFixed(2);
                     document.querySelector("#agy").innerText = "Y: " + accelarationWithGravity[1].toFixed(2);
                     document.querySelector("#agz").innerText = "Z: " + accelarationWithGravity[2].toFixed(2);
+                    document.querySelector("#ags").innerText = "S: " + Math.sqrt(accelarationWithGravity[0] * accelarationWithGravity[0] + accelarationWithGravity[1] * accelarationWithGravity[1] + accelarationWithGravity[2] * accelarationWithGravity[2])
 
                     document.querySelector("#x").innerText = "X: " + gravity[0].toFixed(2);
                     document.querySelector("#y").innerText = "Y: " + gravity[1].toFixed(2);
@@ -175,6 +176,8 @@
             <div id="agy">
             </div>
             <div id="agz">
+            </div>
+            <div id="ags">
             </div>
         </div>
         <div class="container">

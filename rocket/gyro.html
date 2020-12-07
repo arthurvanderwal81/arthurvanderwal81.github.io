@@ -10,6 +10,7 @@
 
             let acceleration = [0.0, 0.0, 0.0];
             let accelarationWithGravity = [0.0, 0.0, 0.0];
+            let accelerationSize = 0.0;
             let gravity = [0.0, 0.0, 0.0];
 
             let rotationCalibrationSamples = 0;
@@ -82,6 +83,13 @@
                     accelarationWithGravity[1] = e.accelerationIncludingGravity.y;
                     accelarationWithGravity[2] = e.accelerationIncludingGravity.z;
 
+                    accelerationSizeWithGravity = Math.sqrt(accelarationWithGravity[0] * accelarationWithGravity[0] + accelarationWithGravity[1] * accelarationWithGravity[1] + accelarationWithGravity[2] * accelarationWithGravity[2];
+                    accelerationSize = accelerationSizeWithGravity - 9.81;
+
+                    accelerationDirection[0] = accelarationWithGravity[0] / accelerationSizeWithGravity;
+                    accelerationDirection[1] = accelarationWithGravity[1] / accelerationSizeWithGravity;
+                    accelerationDirection[2] = accelarationWithGravity[2] / accelerationSizeWithGravity;
+
                     gravity[0] = e.accelerationIncludingGravity.x - e.acceleration.x;
                     gravity[1] = e.accelerationIncludingGravity.y - e.acceleration.y;
                     gravity[2] = e.accelerationIncludingGravity.z - e.acceleration.z;
@@ -121,7 +129,7 @@
                     document.querySelector("#agx").innerText = "X: " + accelarationWithGravity[0].toFixed(2);
                     document.querySelector("#agy").innerText = "Y: " + accelarationWithGravity[1].toFixed(2);
                     document.querySelector("#agz").innerText = "Z: " + accelarationWithGravity[2].toFixed(2);
-                    document.querySelector("#ags").innerText = "S: " + Math.sqrt(accelarationWithGravity[0] * accelarationWithGravity[0] + accelarationWithGravity[1] * accelarationWithGravity[1] + accelarationWithGravity[2] * accelarationWithGravity[2])
+                    document.querySelector("#ags").innerText = "S: " + accelerationSize;
 
                     document.querySelector("#x").innerText = "X: " + gravity[0].toFixed(2);
                     document.querySelector("#y").innerText = "Y: " + gravity[1].toFixed(2);

@@ -95,6 +95,13 @@
                     gravity[1] = e.accelerationIncludingGravity.y - e.acceleration.y;
                     gravity[2] = e.accelerationIncludingGravity.z - e.acceleration.z;
 
+                    if (accelarationWithGravity[0] == 0.0 && accelarationWithGravity[2] == 0.0)
+                    {
+                        rotation[0] = 0.0;
+                        rotation[1] = 0.0;
+                        rotation[2] = 0.0;
+                    }
+
                     if (calibrateMode)
                     {
                         rotationCalibration[0] += e.rotationRate.alpha * e.interval;

@@ -87,6 +87,18 @@
                     accelerationSizeWithGravity = Math.sqrt(accelerationWithGravity[0] * accelerationWithGravity[0] + accelerationWithGravity[1] * accelerationWithGravity[1] + accelerationWithGravity[2] * accelerationWithGravity[2]);
                     accelerationSize = Math.abs(accelerationSizeWithGravity - 9.81);
 
+                    front = [
+                        1.0,
+                        0.0,
+                        0.0
+                    ];
+
+                    left = [
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+
                     down = [
                         0.0,
                         -1.0,
@@ -99,8 +111,13 @@
                         accelerationWithGravity[2] / accelerationSizeWithGravity,
                     ];
 
-                    dot = down[0] * normalizedAcceleration[0] + down[1] * normalizedAcceleration[1] + down[2] * normalizedAcceleration[2];
-                    angle = Math.acos(dot) / Math.PI * 180.0;
+                    dot1 = front[0] * normalizedAcceleration[0] + front[1] * normalizedAcceleration[1] + front[2] * normalizedAcceleration[2];
+                    dot2 = left[0] * normalizedAcceleration[0] + left[1] * normalizedAcceleration[1] + left[2] * normalizedAcceleration[2];
+                    dot3 = down[0] * normalizedAcceleration[0] + down[1] * normalizedAcceleration[1] + down[2] * normalizedAcceleration[2];
+
+                    angle1 = Math.acos(dot1) / Math.PI * 180.0;
+                    angle2 = Math.acos(dot2) / Math.PI * 180.0;
+                    angle3 = Math.acos(dot3) / Math.PI * 180.0;
 
 
                     accelerationDirection[0] = accelerationWithGravity[0];
@@ -166,9 +183,14 @@
                     document.querySelector("#ry").innerText = "Yr: " + rotation[1].toFixed(2);
                     document.querySelector("#rz").innerText = "Zr: " + rotation[2].toFixed(2);
 
-                    document.querySelector("#dot").innerText = "dot: " + dot.toFixed(2);
-                    document.querySelector("#angle").innerText = "angle: " + angle.toFixed(2);
+                    document.querySelector("#dot1").innerText = "dot: " + dot1.toFixed(2);
+                    document.querySelector("#angle1").innerText = "angle: " + angle1.toFixed(2);
 
+                    document.querySelector("#dot2").innerText = "dot: " + dot2.toFixed(2);
+                    document.querySelector("#angle2").innerText = "angle: " + angle2.toFixed(2);
+
+                    document.querySelector("#dot3").innerText = "dot: " + dot3.toFixed(2);
+                    document.querySelector("#angle3").innerText = "angle: " + angle3.toFixed(2);
 
                     let status = "unknown";
 
@@ -261,11 +283,23 @@
         <div id="status">
         </div>
         <div class="container">
-            <div id="dot">
+            <div id="dot1">
             </div>
-            <div id="angle">
+            <div id="angle1">
             </div>
         </div>
+        <div class="container">
+            <div id="dot2">
+            </div>
+            <div id="angle2">
+            </div>
+        </div>
+        <div class="container">
+            <div id="dot3">
+            </div>
+            <div id="angle3">
+            </div>
+        </div>        
         <canvas>
         </canvas>
         <button onclick="calibrate();">Calibrate</button>

@@ -9,7 +9,7 @@
             let ballVelocity = [0.0, 0.0];
 
             let acceleration = [0.0, 0.0, 0.0];
-            let accelarationWithGravity = [0.0, 0.0, 0.0];
+            let accelerationWithGravity = [0.0, 0.0, 0.0];
             let accelerationDirection = [0.0, 0.0, 0.0];
             let accelerationSize = 0.0;
             let gravity = [0.0, 0.0, 0.0];
@@ -80,22 +80,31 @@
                     acceleration[1] = e.acceleration.y;
                     acceleration[2] = e.acceleration.z;
 
-                    accelarationWithGravity[0] = e.accelerationIncludingGravity.x;
-                    accelarationWithGravity[1] = e.accelerationIncludingGravity.y;
-                    accelarationWithGravity[2] = e.accelerationIncludingGravity.z;
+                    accelerationWithGravity[0] = e.accelerationIncludingGravity.x;
+                    accelerationWithGravity[1] = e.accelerationIncludingGravity.y;
+                    accelerationWithGravity[2] = e.accelerationIncludingGravity.z;
 
-                    accelerationSizeWithGravity = Math.sqrt(accelarationWithGravity[0] * accelarationWithGravity[0] + accelarationWithGravity[1] * accelarationWithGravity[1] + accelarationWithGravity[2] * accelarationWithGravity[2]);
+                    down = [
+                        0.0,
+                        -1.0,
+                        0.0
+                    ];
+
+                    dot = down[0] * accelerationWithGravity[0] + down[1] * accelerationWithGravity[1] + down[2] * accelerationWithGravity[2];
+                    angle = Math.acos(dot);
+
+                    accelerationSizeWithGravity = Math.sqrt(accelerationWithGravity[0] * accelerationWithGravity[0] + accelerationWithGravity[1] * accelerationWithGravity[1] + accelerationWithGravity[2] * accelerationWithGravity[2]);
                     accelerationSize = Math.abs(accelerationSizeWithGravity - 9.81);
 
-                    accelerationDirection[0] = accelarationWithGravity[0];
-                    accelerationDirection[1] = accelarationWithGravity[1] - 9.81;
-                    accelerationDirection[2] = accelarationWithGravity[2];
+                    accelerationDirection[0] = accelerationWithGravity[0];
+                    accelerationDirection[1] = accelerationWithGravity[1] - 9.81;
+                    accelerationDirection[2] = accelerationWithGravity[2];
 
                     gravity[0] = e.accelerationIncludingGravity.x - e.acceleration.x;
                     gravity[1] = e.accelerationIncludingGravity.y - e.acceleration.y;
                     gravity[2] = e.accelerationIncludingGravity.z - e.acceleration.z;
 
-                    if (accelarationWithGravity[0] == 0.0 && accelarationWithGravity[2] == 0.0)
+                    if (accelerationWithGravity[0] == 0.0 && accelerationWithGravity[2] == 0.0)
                     {
                         rotation[0] = 0.0;
                         rotation[1] = 0.0;
@@ -143,12 +152,15 @@
                     document.querySelector("#y").innerText = "Y: " + gravity[1].toFixed(2);
                     document.querySelector("#z").innerText = "Z: " + gravity[2].toFixed(2);
 
-                    document.querySelector("#vx").innerText = "Y: " + ballVelocity[0].toFixed(2);
-                    document.querySelector("#vy").innerText = "Z: " + ballVelocity[1].toFixed(2);
+                    document.querySelector("#vx").innerText = "X: " + ballVelocity[0].toFixed(2);
+                    document.querySelector("#vy").innerText = "Y: " + ballVelocity[1].toFixed(2);
 
                     document.querySelector("#rx").innerText = "Xr: " + rotation[0].toFixed(2);
                     document.querySelector("#ry").innerText = "Yr: " + rotation[1].toFixed(2);
                     document.querySelector("#rz").innerText = "Zr: " + rotation[2].toFixed(2);
+
+                    document.querySelector("#dot").innerText = "dot: " + dot.toFixed(2);
+                    document.querySelector("#angle").innerText = "angle: " + angle.toFixed(2);
 
 
                     let status = "unknown";
@@ -229,7 +241,7 @@
             </div>
         </div>
         <div class="container">
-            Rotation version 1.5
+            Rotation version 1.6<br/>
             <div id="rx">
             </div>
             <div id="ry">
@@ -240,6 +252,12 @@
         <div id="error">
         </div>
         <div id="status">
+        </div>
+        <div class="container">
+            <div id="dot">
+            </div>
+            <div id="angle">
+            </div>
         </div>
         <canvas>
         </canvas>

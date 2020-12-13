@@ -1,0 +1,92 @@
+<!-- https://sensor-js.xyz/demo.html -->
+<!-- accelerationIncludingGravity - accelertion = gravity -->
+<html>
+    <head>
+        <title>Version 1.5</title>
+        <script type="text/javascript">
+
+            let accelerometer = [0.0, 0.0, 0.0];
+            let angle = 0.0;
+
+            const image = new Image(30, 392);
+            image.src = "img/falcon9.jpg";
+
+            function calibrate()
+            {
+                calibrateMode = true;
+
+                setTimeout(function() {
+                    calibrateMode = false;
+
+                    rotationCalibration[0] /= rotationCalibrationSamples;
+                    rotationCalibration[1] /= rotationCalibrationSamples;
+                    rotationCalibration[2] /= rotationCalibrationSamples;
+
+                    alert("" + rotationCalibration[0] + " " + rotationCalibration[1] + " " + rotationCalibration[2]);
+                }, 10000);
+            }
+
+            window.addEventListener("devicemotion", function(e) {
+                console.log(e);
+                try
+                {
+                    accelerometer[0] = e.accelerationIncludingGravity.x;
+                    accelerometer[1] = e.accelerationIncludingGravity.y;
+                    accelerometer[2] = e.accelerationIncludingGravity.z;
+
+                    accelerationSizeWithGravity = Math.sqrt(accelerationWithGravity[0] * accelerationWithGravity[0] + accelerationWithGravity[1] * accelerationWithGravity[1] + accelerationWithGravity[2] * accelerationWithGravity[2]);
+                    accelerationSize = Math.abs(accelerationSizeWithGravity - 9.81);
+
+                    down = [
+                        0.0,
+                        -1.0,
+                        0.0
+                    ];
+
+                    normalizedAccelerometer = [
+                        accelerometer[0] / accelerationSizeWithGravity,
+                        accelerometer[1] / accelerationSizeWithGravity,
+                        accelerometer[2] / accelerationSizeWithGravity,
+                    ];
+
+                    dot = down[0] * normalizedAccelerometer[0] + down[1] * normalizedAccelerometer[1] + down[2] * normalizedAccelerometer[2];
+                    angle = Math.acos(dot) / Math.PI * 180.0;
+                }
+                catch (e)
+                {
+                    document.querySelector("#error").innerText = e.message;
+                }
+            });
+
+            window.addEventListener("load", function() {
+                setInterval(function() {
+                    let status = "unknown";
+                    document.querySelector("#status").innerText = status;
+                    document.querySelector("#accelerometer").innerText = "" + accelerometer[0].toFixed(2) + ", " + accelerometer[1].toFixed(2) + ", " + accelerometer[2].toFixed(2);
+                    document.querySelector("#angle").innerText = angle1.toFixed(2);
+                }, 100);
+            });
+
+        </script>
+
+    </head>
+    <body>
+        <table style="width: 100%; border: 1px;">
+            <tr>
+                <td>Status</td>
+                <td id="status"></td>
+            <tr>
+                <td>
+                    Accelerometer
+                </td>
+                <td id="accelerometer">
+                </td>
+            </tr>
+            <tr>
+                <td>Angle with down</td>
+                <td id="angle">
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

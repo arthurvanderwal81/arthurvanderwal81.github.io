@@ -26,6 +26,8 @@
                         gyroCalibration[0] += e.rotationRate.alpha * e.interval;
                         gyroCalibration[1] += e.rotationRate.beta * e.interval;
                         gyroCalibration[2] += e.rotationRate.gamma * e.interval;
+
+                        gyroCalibrationSamples += 1;
                     }
 
                     accelerometer[0] = e.accelerationIncludingGravity.x;
@@ -97,7 +99,11 @@
                     document.querySelector("#accelerometer").innerText = "" + accelerometer[0].toFixed(2) + ", " + accelerometer[1].toFixed(2) + ", " + accelerometer[2].toFixed(2);
                     document.querySelector("#angle").innerText = angle.toFixed(2);
                     document.querySelector("#calibrationTime").innerText = "" + calibrationTimer;
-                    document.querySelector("#gyroCalibration").innerText = "" + gyroCalibration[0].toFixed(2) + ", " + gyroCalibration[1].toFixed(2) + ", " + gyroCalibration[2].toFixed(2);
+
+                    if (gyroCalibrated)
+                    {
+                        document.querySelector("#gyroCalibration").innerText = "" + gyroCalibration[0].toFixed(2) + ", " + gyroCalibration[1].toFixed(2) + ", " + gyroCalibration[2].toFixed(2);
+                    }
                 }, 100);
             });
 
@@ -111,7 +117,7 @@
                     Version
                 </th>
                 <th>
-                    1.4
+                    1.6
                 </th>
             <tr>
                 <td>Status</td>

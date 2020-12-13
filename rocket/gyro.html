@@ -84,17 +84,24 @@
                     accelerationWithGravity[1] = e.accelerationIncludingGravity.y;
                     accelerationWithGravity[2] = e.accelerationIncludingGravity.z;
 
+                    accelerationSizeWithGravity = Math.sqrt(accelerationWithGravity[0] * accelerationWithGravity[0] + accelerationWithGravity[1] * accelerationWithGravity[1] + accelerationWithGravity[2] * accelerationWithGravity[2]);
+                    accelerationSize = Math.abs(accelerationSizeWithGravity - 9.81);
+
                     down = [
                         0.0,
                         -1.0,
                         0.0
                     ];
 
-                    dot = down[0] * accelerationWithGravity[0] + down[1] * accelerationWithGravity[1] + down[2] * accelerationWithGravity[2];
+                    normalizedAcceleration = [
+                        accelerationWithGravity[0] / accelerationSizeWithGravity,
+                        accelerationWithGravity[1] / accelerationSizeWithGravity,
+                        accelerationWithGravity[2] / accelerationSizeWithGravity,
+                    ];
+
+                    dot = down[0] * normalizedAcceleration[0] + down[1] * normalizedAcceleration[1] + down[2] * normalizedAcceleration[2];
                     angle = Math.acos(dot);
 
-                    accelerationSizeWithGravity = Math.sqrt(accelerationWithGravity[0] * accelerationWithGravity[0] + accelerationWithGravity[1] * accelerationWithGravity[1] + accelerationWithGravity[2] * accelerationWithGravity[2]);
-                    accelerationSize = Math.abs(accelerationSizeWithGravity - 9.81);
 
                     accelerationDirection[0] = accelerationWithGravity[0];
                     accelerationDirection[1] = accelerationWithGravity[1] - 9.81;

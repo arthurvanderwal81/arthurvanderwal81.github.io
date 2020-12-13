@@ -11,6 +11,7 @@
             let gyroCalibration = [0.0, 0.0, 0.0];
             let gyroCalibrationSamples = 0;
             let uprightTimestamp = -1;
+            let calibrationTimer = 0.0
             let angle = 0.0;
 
             const image = new Image(30, 392);
@@ -58,16 +59,20 @@
                             if (uprightTimestamp == -1)
                             {
                                 uprightTimestamp = Date.now();
+                                calibrationTimer = 0.0;
                             }
                             else
                             {
-                                if ((Date.now() - uprightTimestamp) / 1000.0 >= 2.0)
+                                calibrationTimer = (Date.now() - uprightTimestamp) / 1000.0;
+
+                                if (calibrationTimer >= 2.0)
                                 {
                                     gyroCalibration[0] /= gyroCalibrationSamples;
                                     gyroCalibration[1] /= gyroCalibrationSamples;
                                     gyroCalibration[2] /= gyroCalibrationSamples;
 
                                     status = "ready for launch";
+                                    calibrationTime = 0.0;
                                 }
                             }
                         }
@@ -86,7 +91,7 @@
                     document.querySelector("#status").innerText = status;
                     document.querySelector("#accelerometer").innerText = "" + accelerometer[0].toFixed(2) + ", " + accelerometer[1].toFixed(2) + ", " + accelerometer[2].toFixed(2);
                     document.querySelector("#angle").innerText = angle.toFixed(2);
-                    document.querySelector("#calibrationTime").innerText = "" + (Date.now() - uprightTimestamp);
+                    document.querySelector("#calibrationTime").innerText = "" + calibrationTimer;
                 }, 100);
             });
 
@@ -100,7 +105,7 @@
                     Version
                 </th>
                 <th>
-                    1.0
+                    1.1
                 </th>
             <tr>
                 <td>Status</td>

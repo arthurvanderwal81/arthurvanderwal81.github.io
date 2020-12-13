@@ -71,14 +71,17 @@
                                     gyroCalibration[1] /= gyroCalibrationSamples;
                                     gyroCalibration[2] /= gyroCalibrationSamples;
 
+                                    gyroCalibrated = true;
+
                                     status = "ready for launch";
-                                    calibrationTime = 0.0;
+                                    calibrationTimer = 0.0;
                                 }
                             }
                         }
                         else
                         {
                             status = "waiting for angle";
+                            calibrationTimer = 0.0;
                         }
                     }
                 }

@@ -100,7 +100,7 @@
                     ];
 
                     dot = down[0] * normalizedAcceleration[0] + down[1] * normalizedAcceleration[1] + down[2] * normalizedAcceleration[2];
-                    angle = Math.acos(dot);
+                    angle = Math.acos(dot) / Math.PI * 180.0;
 
 
                     accelerationDirection[0] = accelerationWithGravity[0];

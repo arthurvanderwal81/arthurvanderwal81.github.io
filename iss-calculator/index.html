@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html land="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>ISS Calculator</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="progress-indicator">
+                <div>Your progress: 60% complete</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 60%;"></div>
+                </div>
+            </div>
+            <div class="question">
+                <div>
+                    What is your current quaterly energy bill?
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="50" max="1500" />
+                </div>
+            </div>
+            <div class="question">
+                What time of day do you mostly use power?
+                <div class="radio-button-container">
+                    <label>
+                        <input type="radio" name="time-of-day" />
+                        <span>Day</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-of-day" />
+                        <span>Night</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="time-of-day" />
+                        <span>Day & Night</span>
+                    </label>
+                </div>
+            </div>
+            <div class="navigation-container">
+                <button class="back-button">
+                    < Back
+                </button>
+                <button class="next-button">
+                    Next >
+                </button>
+            </div>
+        </div>
+    </body>
+</html>

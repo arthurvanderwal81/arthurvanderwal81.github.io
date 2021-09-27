@@ -1,0 +1,231 @@
+@font-face {
+    font-family: "VisbyCF-Regular";
+    src: url('https://goodcitizens.s3.ap-southeast-2.amazonaws.com/Webfont/webFonts/VisbyCFRegular/font.woff2') format('woff2'), url('https://goodcitizens.s3.ap-southeast-2.amazonaws.com/Webfont/webFonts/VisbyCFRegular/font.woff') format('woff');
+}
+
+@font-face {
+    font-family: "VisbyCF-Heavy";
+    src: url('https://goodcitizens.s3.ap-southeast-2.amazonaws.com/Webfont/webFonts/VisbyCFHeavy/font.woff2') format('woff2'), url('https://goodcitizens.s3.ap-southeast-2.amazonaws.com/Webfont/webFonts/VisbyCFHeavy/font.woff') format('woff');
+}
+
+:root {
+    --iss-red: rgb(239, 81, 63);
+    --iss-yellow: rgb(255, 220, 4);
+}
+
+html {
+    font-size: 16px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html, body, p {
+    font-family: "VisbyCF-Heavy";
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: 60%;
+    height: 100%;
+
+    margin: 0 auto;
+    padding: 0 4rem;
+
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.progress-indicator > div {
+    margin-bottom: 2rem;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 10px;
+
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.progress-bar-container > .progress-bar {
+    height: 100%;
+
+    background-color: var(--iss-red);
+    border-radius: 5px;
+
+    transition: width 0.5s ease;
+}
+
+.question > * {
+    margin: 1rem 0;
+}
+
+.slider-container > input {
+    width: 100%;
+}
+
+.radio-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.radio-button-container > label {
+    position: relative;
+
+    width: 200px;
+    height: 80px;
+
+    margin: 0 .5rem;
+
+    background-color: white;
+    border: 5px solid black;
+}
+
+/* .radio-button-container > label > input,*/
+.radio-button-container > label > span {
+    position: absolute;
+
+    display: block;
+
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+
+    cursor: pointer;
+}
+
+.radio-button-container > label > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: white;
+
+    transition: background-color 0.3s ease;
+}
+
+.radio-button-container input[type="radio"] {
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+.radio-button-container input[type="radio"]:checked + span {
+    background-color: var(--iss-yellow);
+}
+
+.button-container button {
+    width: 200px;
+    height: 80px;
+
+}
+
+.navigation-container {
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+.navigation-container button {
+    width: 234px;
+    height: 64px;
+
+    margin-left: 2rem;
+
+    background-color: white;
+}
+
+.navigation-container button.back-button {
+    color: var(--iss-red);
+
+    border: none;
+
+    font-family: 'Visby CF', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.navigation-container button.next-button {
+    color: white;
+
+    border: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='234' height='64' viewBox='0 0 234 64'%3E%3Cpath id='Path_1' data-name='Path 1' d='M782.5,189.907q104.37-.535,208.772-1.175c5.957-.036,12.539-.016,16.991,1.007,5.113,1.174,5.374,3.179,5.253,4.946-1.069,15.683-2.139,36.68-3.208,52.362-.064.949-.284,2-2.865,2.674-2.51.658-6.436.746-10.007.794q-94.7,1.279-189.472,2.193c-6.027.058-13.027,0-16.711-1.229-2.181-.73-2.6-1.7-2.928-2.619-6.416-17.891-9.462-41.2-8.666-59.163' transform='translate(-779.54 -188.723)' fill='%23ef503f'/%3E%3C/svg%3E%0A");
+
+    font-weight: 800;
+    font-size: 20px;
+
+    transform: scale(1);
+
+    transition: transform 0.3s ease;
+}
+
+.navigation-container button.next-button:hover {
+    transform: scale(1.05);
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .container {
+        width: auto;
+
+        margin: 0 1rem;
+        padding: 0;
+    }
+
+    .navigation-container {
+        justify-content: center;
+    }
+
+    .navigation-container button {
+        margin: 0 .5rem;
+
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .container {
+        width: 100%;
+
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .container {
+        width: 60%;
+
+        margin: 0 auto;
+        padding: 0 4rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

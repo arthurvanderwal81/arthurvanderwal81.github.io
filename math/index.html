@@ -13,11 +13,49 @@
                 display: inline-block;
             }
 
-            div.container {
-                width: 100%;
+            video {
                 height: 100%;
+            }
+
+            .video-container {
+                position: absolute;
+
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+
+                opacity: 1;
+                z-index: 2;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                transition: opacity 0.2s ease, z-index 0.2s ease;
+            }
+
+            .hidden {
+                opacity: 0;
+                z-index: -1;
+            }
+
+            .question-container {
+                width: 100%;
                 display: flex;
                 justify-content: center;
+                align-items: center;
+            }
+
+            div.container {
+                position: relative;
+
+                width: 100%;
+                height: 100%;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
                 align-items: center;
             }
 
@@ -127,10 +165,16 @@
                     }
                 }
 
+                let video = document.querySelector("video");
+                video.addEventListener("ended", function() {
+                    document.querySelector(".video-container").classList.add("hidden");
+                });
+
                 document.querySelector("input[type='number']").addEventListener("keypress", function(e) {
                     if (e.key === "Enter")
                     {
                         let audio = null;
+                        let video = document.querySelector("video");
 
                         if (this.value == solveCurrentMathProblem())
                         {
@@ -147,6 +191,10 @@
                             }, 500);
 
                             document.querySelector("input[type='number']").value = "";
+
+                            video.currentTime = 7;
+                            document.querySelector(".video-container").classList.remove("hidden");
+                            video.play();
                         }
 
                         audio.play();
@@ -160,17 +208,24 @@
     </head>
     <body>
         <div class="container">
-            <div class="question">
-                <div id="number1">
-                </div>
-                <div id="operator">
-                </div>
-                <div id="number2">
-                </div>
-                =
+            <div class="video-container hidden">
+                <video>
+                    <source src="https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/rabbit320.mp4" type="video/mp4">
+                </video>
             </div>
-            <div class="answer">
-                <input type="number" autofocus>
+            <div class="question-container">
+                <div class="question">
+                    <div id="number1">
+                    </div>
+                    <div id="operator">
+                    </div>
+                    <div id="number2">
+                    </div>
+                    =
+                </div>
+                <div class="answer">
+                    <input type="number" autofocus>
+                </div>
             </div>
         </div>
     </body>

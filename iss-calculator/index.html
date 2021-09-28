@@ -10,43 +10,191 @@
     <body>
         <div class="container">
             <div class="progress-indicator">
-                <div>Your progress: 60% complete</div>
+                <div>Your progress: <span data-progress>0%</span> complete</div>
                 <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 60%;"></div>
+                    <div class="progress-bar" style="width: 0%;"></div>
                 </div>
             </div>
-            <div class="question">
-                <div>
-                    What is your current quaterly energy bill?
-                </div>
-                <div class="slider-container">
-                    <input type="range" min="50" max="1500" />
-                </div>
-            </div>
-            <div class="question">
-                What time of day do you mostly use power?
-                <div class="radio-button-container">
-                    <label>
-                        <input type="radio" name="time-of-day" />
-                        <span>Day</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="time-of-day" />
-                        <span>Night</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="time-of-day" />
-                        <span>Day & Night</span>
-                    </label>
+            <div class="step-frame">
+                <div class="step-container step-1" data-step="1">
+                    <div class="step">
+                        <div class="question">
+                            Do you rent, or own the property?
+                            <div>
+                                <small>
+                                    To install solar, you need to own your home or have permission from the homeowner.
+                                </small>
+                            </div>
+
+                            <div class="radio-button-container">
+                                <label>
+                                    <input type="radio" name="own-rent" />
+                                    <span>Own</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="own-rent" />
+                                    <span>Rent</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="question">
+                            <div>
+                                What is your current quaterly energy bill?
+                            </div>
+                            <div class="slider-container">
+                                <input type="range" min="50" max="1500" step="5" name="bill-size" />
+                            </div>
+                        </div>
+                        <div class="question">
+                            What time of day do you mostly use power?
+                            <div class="radio-button-container">
+                                <label>
+                                    <input type="radio" name="time-of-day" />
+                                    <span>Day</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="time-of-day" />
+                                    <span>Night</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="time-of-day" />
+                                    <span>Day & Night</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="question">
+                            What's your address?
+                            <div>
+                                <input type="text" name="address" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        Confirm your details to instantly receive your Rebate & Potential Savings results!
+
+                        <div class="details-form">
+                            <input type="text" placeholder="Full Name" />
+                            <input type="text" placeholder="Phone Number" />
+                            <input type="email" placeholder="Email address" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="navigation-container">
-                <button class="back-button">
+                <button class="back-button v-hidden">
                     < Back
                 </button>
                 <button class="next-button">
                     Next >
                 </button>
+
+                <script type="text/javascript">
+
+                    function getSearchParams()
+                    {
+                        return (new URL(window.location.href).searchParams);
+                    }
+
+                    function updateProgress(step)
+                    {
+                        let progress = (step - 1) * 25;
+
+                        document.querySelector(".progress-bar").style.width = `${progress}%`;
+                        document.querySelector("span[data-progress]").innerText = `${progress}%`;
+                    }
+
+                    document.querySelector("button.back-button").addEventListener("click", function(e) {
+                        let stepContainer = document.querySelector(".step-container");
+
+                        let currentStep = parseInt(stepContainer.dataset.step);
+
+                        currentStep = Math.max(1, currentStep - 1);
+
+                        stepContainer.dataset.step = currentStep;
+                        stepContainer.classList = `step-container step-${currentStep}`;
+
+                        updateProgress(currentStep);
+
+                        if (currentStep == 1)
+                        {
+                            document.querySelector("button.back-button").classList.add("v-hidden");
+                        }
+                        else
+                        {
+                            document.querySelector("button.back-button").classList.remove("v-hidden");
+                        }
+
+                        document.querySelector("button.next-button").classList.remove("v-hidden");
+                    });
+
+                    document.querySelector("button.next-button").addEventListener("click", function(e) {
+                        let stepContainer = document.querySelector(".step-container");
+
+                        let currentStep = parseInt(stepContainer.dataset.step);
+
+                        if (currentStep + 1 > 4)
+                        {
+                            let searchParams = getSearchParams();
+                            let redirectParameters = [];
+                            let copyParameters = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+
+                            for (let i = 0; i < copyParameters.length; i++)
+                            {
+                                let copyParameterValue = searchParams.get(copyParameters[i]);
+
+                                if (copyParameterValue != null)
+                                {
+                                    redirectParameters.push(`${copyParameters[i]}=${copyParameterValue}`);
+                                }
+                            }
+
+                            let rebateCalculationResult = 100.0;
+                            let savingsCalculationResult = 200.0;
+
+                            redirectParameters.push(`rebate=${rebateCalculationResult.toString()}`);
+                            redirectParameters.push(`savings=${savingsCalculationResult.toString()}`);
+
+                            window.location.href = "http://lp.instylesolar.com/calculator-thanks/?" + redirectParameters.join("&");
+                        }
+
+                        currentStep = Math.min(4, currentStep + 1);
+
+                        stepContainer.dataset.step = currentStep;
+                        stepContainer.classList = `step-container step-${currentStep}`;
+
+                        updateProgress(currentStep);
+
+                        if (currentStep == 4)
+                        {
+                            //document.querySelector("button.next-button").classList.add("v-hidden");
+                        }
+                        else
+                        {
+                            document.querySelector("button.next-button").classList.remove("v-hidden");
+                        }
+
+                        document.querySelector("button.back-button").classList.remove("v-hidden");
+                    });
+
+                    function updateStepWidth() {
+                        console.log(window.innerHeight);
+                        console.log(window.innerWidth);
+
+                        document.documentElement.style.setProperty("--step-width", `${document.querySelector(".step-frame").clientWidth}px`);
+                    }
+
+                    window.onresize = updateStepWidth;
+
+                    updateStepWidth();
+
+                </script>
             </div>
         </div>
     </body>

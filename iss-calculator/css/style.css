@@ -11,6 +11,8 @@
 :root {
     --iss-red: rgb(239, 81, 63);
     --iss-yellow: rgb(255, 220, 4);
+
+    --step-width: 811px;
 }
 
 html {
@@ -29,6 +31,31 @@ html, body, p {
 
 button {
     cursor: pointer;
+}
+
+input {
+    height: 2rem;
+
+    border-radius: 5px;
+
+    font-family: 'Visby CF', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 1.2em;
+
+    margin-bottom: 2rem;
+}
+
+input[name="address"] {
+    width: calc(100% - 10px);
+}
+
+.d-none {
+    display: none;
+}
+
+.v-hidden {
+    visibility: hidden;
 }
 
 .container {
@@ -134,7 +161,64 @@ button {
 .button-container button {
     width: 200px;
     height: 80px;
+}
 
+.step-frame {
+    position: relative;
+
+    width: 100%;
+    height: 50vh;
+
+    /* background-color: #eee; */
+
+    overflow: hidden;
+}
+
+.step-container {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    transition: left 0.2s ease;
+}
+
+.step-container.step-1 {
+    left: 0;
+}
+
+.step-container.step-2 {
+    left: calc(-1 * var(--step-width));
+}
+
+.step-container.step-3 {
+    left: calc(-2 * var(--step-width));
+}
+
+.step-container.step-4 {
+    left: calc(-3 * var(--step-width));
+}
+
+.step-container .step {
+    width: var(--step-width);
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-around;
+}
+
+.details-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .navigation-container {
@@ -203,7 +287,7 @@ button {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .container {
-        width: 100%;
+        width: auto;
 
         margin: 0 auto;
         padding: 0 1rem;

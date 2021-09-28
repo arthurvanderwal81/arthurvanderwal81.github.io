@@ -6,6 +6,22 @@
 
         <title>ISS Calculator</title>
         <link rel="stylesheet" href="css/style.css">
+
+        <script>
+            function initMap()
+            {
+                const input = document.getElementsByName("address")[0];
+                const options = {
+                  componentRestrictions: { country: "au" },
+                  fields: ["address_components", "geometry", "icon", "name"],
+                  strictBounds: false,
+                  types: ["establishment"],
+                };
+                const autocomplete = new google.maps.places.Autocomplete(input, options);
+            }
+        </script>
+
+        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzLqnMCxm93DubldMqIESPxVKkvrgHlE&libraries=places&callback=initMap"></script>
     </head>
     <body>
         <div class="container">

@@ -404,7 +404,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus
     }
 
     input[type="text"], input[type="email"] {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .navigation-container {

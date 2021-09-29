@@ -249,6 +249,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus
 
     cursor: pointer;
 
+    text-align: center;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -395,6 +397,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus
 
     .question > h1, h1 {
         font-size: 18px;
+    }
+
+    .question:nth-child(n+2) {
+        margin-top: 0;
     }
 
     input[type="text"], input[type="email"] {

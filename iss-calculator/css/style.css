@@ -385,13 +385,20 @@ input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus
     transform: scale(1.05);
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     .container {
         width: auto;
 
         margin: 0 1rem;
         padding: 0;
+    }
+
+    .question > h1, h1 {
+        font-size: 18px;
+    }
+
+    input[type="text"], input[type="email"] {
+        font-size: 12px;
     }
 
     .navigation-container {
@@ -402,34 +409,4 @@ input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus
         margin: 0 .5rem;
 
     }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .container {
-        width: auto;
-
-        margin: 0 auto;
-        padding: 0 1rem;
-    }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-    .container {
-        width: 60%;
-
-        margin: 0 auto;
-        padding: 0 4rem;
-    }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-
 }

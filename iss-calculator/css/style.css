@@ -13,6 +13,8 @@
     --iss-yellow: rgb(255, 220, 4);
 
     --step-width: 811px;
+
+    --slider-position: 0px;
 }
 
 html {
@@ -23,31 +25,52 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+
+    background-color: white;
 }
 
-html, body, p {
+html, body, p, span {
+    font-family: "VisbyCF-Regular";
+}
+
+h1 {
     font-family: "VisbyCF-Heavy";
+}
+
+p {
+    margin: 2rem 0;
 }
 
 button {
     cursor: pointer;
 }
 
-input {
+input[type="text"], input[type="email"] {
     height: 2rem;
 
+    /*
     border-radius: 5px;
+    */
 
-    font-family: 'Visby CF', sans-serif;
+    font-family: 'VisbyCF-Regular', sans-serif;
+    /*
     font-weight: 800;
+    */
     font-size: 20px;
     line-height: 1.2em;
+
+    border: none;
+    border-bottom: 2px solid black;
 
     margin-bottom: 2rem;
 }
 
 input[name="address"] {
     width: calc(100% - 10px);
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus {
+    outline: none;
 }
 
 .d-none {
@@ -68,11 +91,21 @@ input[name="address"] {
     display: flex;
 
     flex-direction: column;
+    /*
     justify-content: space-around;
+    */
 }
 
-.progress-indicator > div {
+.progress-indicator > p, .progress-indicator > div {
+    margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+.progress-indicator > p {
+    font-family: 'VisbyCF-Regular', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.44em;
 }
 
 .progress-bar-container {
@@ -92,26 +125,108 @@ input[name="address"] {
     transition: width 0.5s ease;
 }
 
+.question > h1 {
+    font-size: 25px;
+}
+
 .question > * {
     margin: 1rem 0;
 }
 
-.slider-container > input {
+.question:nth-child(n+2) {
+    margin-top: 2rem;
+}
+
+.slider-container {
+    width: 90%;
+
+    margin: 0 auto;
+}
+
+.slider-container > input[type="range"] {
+    width: calc(100% - 10px);
+
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+
+    background-image: url("../images/slider.svg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+}
+
+.slider-container > input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    width: 22px;
+    height: 35px;
+    background-color: transparent;
+    background-image: url("../images/thumb.svg");
+    background-size: 100% auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transform: translateY(-24px);
+}
+
+.slider-container .top-legend, .slider-container .bottom-legend {
+    position: relative;
+
     width: 100%;
+    height: 1rem;
+}
+
+.slider-container .top-legend .left {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    opacity: 1;
+
+    transition: opacity 0.2s ease;
+}
+
+.slider-container .top-legend .left.hidden {
+    opacity: 0;
+}
+
+.slider-container .top-legend .right {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+
+    opacity: 1;
+
+    transition: opacity 0.2s ease;
+}
+
+.slider-container .top-legend .right.hidden {
+    opacity: 0;
+}
+
+.slider-container .bottom-legend .follow {
+    position: absolute;
+
+    left: calc(var(--slider-position) - .5rem);
+    font-weight: 800;
 }
 
 .radio-button-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .radio-button-container > label {
     position: relative;
 
-    width: 200px;
-    height: 80px;
+    width: 230px;
+    height: 60px;
 
     margin: 0 .5rem;
 
@@ -131,9 +246,7 @@ input[name="address"] {
     bottom: 0px;
 
     cursor: pointer;
-}
 
-.radio-button-container > label > span {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,7 +267,7 @@ input[name="address"] {
     visibility: hidden;
 }
 
-.radio-button-container input[type="radio"]:checked + span {
+.radio-button-container input[type="radio"]:checked + span, .radio-button-container > label > span:hover {
     background-color: var(--iss-yellow);
 }
 
@@ -168,6 +281,7 @@ input[name="address"] {
 
     width: 100%;
     height: 50vh;
+    min-height: 280px;
 
     /* background-color: #eee; */
 
@@ -212,13 +326,17 @@ input[name="address"] {
 
     flex-direction: column;
 
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 .details-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.details-form table tr {
+    height: 100px;
 }
 
 .navigation-container {

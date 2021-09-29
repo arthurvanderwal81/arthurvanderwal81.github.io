@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>iOS test</title>
+	</head>
+	<body>
+
+		<textarea style="width: 500px; height: 200px;"></textarea>
+
+		<script type="text/javascript">
+
+	let eventId = parseInt(Math.random() * 1000000).toString();
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", 'https://moneynutsandbolts.com/fbpix/fb.php', true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+	xhr.onreadystatechange = function() { // Call a function when the state changes.
+    	if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        	// Request finished. Do processing here.
+			document.querySelector("textarea").value = this.responseText;
+    	}
+		else
+		{
+			document.querySelector("textarea").value = this.status.toString();
+		}
+	}
+
+  let additionalPara = "";
+
+xhr.send("event_id="+eventId+"&user_agent="+encodeURIComponent(navigator.userAgent)+"&current_url="+encodeURIComponent(window.location.href)+"&action=lead"+additionalPara);
+
+
+		</script>
+	</body>
+</html>

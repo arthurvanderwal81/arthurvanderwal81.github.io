@@ -251,6 +251,11 @@
                             let place = autocomplete.getPlace();
 
                             console.log(place);
+
+                            let postalCodeComponent = place.address_components.find(c => c.types.includes("postal_code"));
+
+                            console.log(postalCodeComponent);
+
                                 //for (var i = 0; i < place.address_components.length; i++) {
                                   //for (var j = 0; j < place.address_components[i].types.length; j++) {
                                     //if (place.address_components[i].types[j] == "postal_code") {

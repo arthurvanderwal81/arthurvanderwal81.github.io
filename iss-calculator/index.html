@@ -245,6 +245,13 @@
                                 }
                             }
 
+                            let place = autocomplete.getPlace();
+
+                            console.log(place);
+                                //for (var i = 0; i < place.address_components.length; i++) {
+                                  //for (var j = 0; j < place.address_components[i].types.length; j++) {
+                                    //if (place.address_components[i].types[j] == "postal_code") {
+
                             let zipcode = document.querySelector("[name='zipcode']").value;
                             let billSize = document.querySelector("[name='bill-size']").value;
                             let useTime = document.querySelector("[name='time-of-day']:checked").value;

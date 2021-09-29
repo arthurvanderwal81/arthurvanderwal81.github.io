@@ -10,6 +10,8 @@
         <script type="text/javascript" src="js/calculator.js"></script>
 
         <script>
+            let autcomplete = null;
+
             function initMap()
             {
                 const input = document.getElementsByName("address")[0];
@@ -19,7 +21,8 @@
                   strictBounds: false,
                   types: ["establishment"],
                 };
-                const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+                autocomplete = new google.maps.places.Autocomplete(input, options);
             }
         </script>
 

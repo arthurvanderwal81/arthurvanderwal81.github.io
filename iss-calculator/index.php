@@ -50,11 +50,11 @@
 
                                 <div class="radio-button-container">
                                     <label>
-                                        <input type="radio" name="own-rent" data-action="next" />
+                                        <input type="radio" name="own-rent" value="own" data-action="next" />
                                         <span>Own</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="own-rent" data-action="next" />
+                                        <input type="radio" name="own-rent" value="rent" data-action="next" />
                                         <span>Rent</span>
                                     </label>
                                 </div>
@@ -66,7 +66,7 @@
                         <form id="form-step-2">
                             <div class="question">
                                 <h1>
-                                    What is your current quaterly energy bill?
+                                    What is your current quarterly energy bill?
                                 </h1>
                                 <div class="slider-container">
                                     <div class="top-legend">
@@ -109,7 +109,7 @@
                         <form id="form-step-3">
                             <div class="question">
                                 <h1>What's your address?</h1>
-                                <p>Postcode</p>
+                                <p>Address</p>
                                 <div>
                                     <input type="text" name="address" required />
                                 </div>
@@ -125,18 +125,18 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="text" placeholder="First Name" name="first_name" required />
+                                            <input type="text" placeholder="First Name" name="first-name" required />
                                         </td>
                                         <td>
-                                            <input type="text" placeholder="Last Name" name="last_name" required />
+                                            <input type="text" placeholder="Last Name" name="last-name" required />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" placeholder="Phone Number" name="phone_number" required />
+                                            <input type="text" placeholder="Phone Number" name="phone-number" required />
                                         </td>
                                         <td>
-                                            <input type="email" placeholder="Email address" name="email_address" required />
+                                            <input type="email" placeholder="Email address" name="email-address" required />
                                         </td>
                                     </tr>
                                 </table>
@@ -235,8 +235,9 @@
                         if (currentStep + 1 > 4)
                         {
                             let searchParams = getSearchParams();
-                            let redirectParameters = [];
-                            let copyParameters = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+
+                            let formData = new FormData();
+                            let copyParameters = ["utm_source", "utm_medium", "utm_campaign", "utm_campaign_id", "utm_content", "utm_ad_set_id", "utm_ad_id", "utm_term"];
 
                             for (let i = 0; i < copyParameters.length; i++)
                             {
@@ -244,7 +245,11 @@
 
                                 if (copyParameterValue != null)
                                 {
-                                    redirectParameters.push(`${copyParameters[i]}=${copyParameterValue}`);
+                                    formData.append(copyParameters[i], copyParameterValue);
+                                }
+                                else
+                                {
+                                    formData.append(copyParameters[i], "");
                                 }
                             }
 
@@ -261,10 +266,28 @@
                             let rebateCalculationResult = calculationResults.rebate.toFixed(2);
                             let savingsCalculationResult = calculationResults.savings.toFixed(2);
 
+                            let redirectParameters = [];
                             redirectParameters.push(`rebate=${rebateCalculationResult.toString()}`);
                             redirectParameters.push(`savings=${savingsCalculationResult.toString()}`);
 
-                            window.top.location.href = "http://lp.instylesolar.com/calculator-thanks/?" + redirectParameters.join("&");
+                            formData.append("own-rent", document.querySelector("[name='own-rent']:checked").value);
+                            formData.append("bill-size", document.querySelector("[name='bill-size']").value);
+                            formData.append("time-of-day", document.querySelector("[name='time-of-day']:checked").value);
+                            formData.append("address", document.querySelector("[name='address']").value);
+                            formData.append("postcode", zipcode);
+                            formData.append("first-name", document.querySelector("[name='first-name']").value);
+                            formData.append("last-name", document.querySelector("[name='last-name']").value);
+                            formData.append("phone-number", document.querySelector("[name='phone-number']").value);
+                            formData.append("email-addres", document.querySelector("[name='email-addres']").value);
+                            formData.append("ip-address", "<?= $_SERVER["REMOTE_ADDR"] ?>");
+
+                            fetch("https://hooks.zapier.com/hooks/catch/695165/btoz9g4/", { "method": "POST", "body": formData })
+                                .then(response => response.json())
+                                .then(json => {
+                                    console.log(json);
+
+                                    //window.top.location.href = "http://lp.instylesolar.com/calculator-thanks/?" + redirectParameters.join("&");
+                                });
                         }
 
                         currentStep = Math.min(4, currentStep + 1);

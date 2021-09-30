@@ -279,7 +279,8 @@
                             formData.append("last-name", document.querySelector("[name='last-name']").value);
                             formData.append("phone-number", document.querySelector("[name='phone-number']").value);
                             formData.append("email-addres", document.querySelector("[name='email-addres']").value);
-                            formData.append("ip-address", "<?= $_SERVER["REMOTE_ADDR"] ?>");
+                            //formData.append("ip-address", "<?= $_SERVER["REMOTE_ADDR"] ?>");
+                            formData.append("ip-address", "127.0.0.1");
 
                             fetch("https://hooks.zapier.com/hooks/catch/695165/btoz9g4/", { "method": "POST", "body": formData })
                                 .then(response => response.json())

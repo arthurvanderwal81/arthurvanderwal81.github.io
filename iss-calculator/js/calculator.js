@@ -88,11 +88,11 @@ function calculate(zipcode, billSize, useTime)
     }
 
     let systemSize = parseInt(billSize) / 100.0;
-    let dailyProduction = systemSize * 5.11;
+    let dailyProduction = systemSize * 10.0;
 
     // TODO: these should be averages
-    let customerTarrif = 1.0;
-    let customerFeedInTarrif = 1.0;
+    let customerTarrif = .47;
+    let customerFeedInTarrif = .9;
 
     result.savings = (dailyProduction * usePercent * customerTarrif) + (dailyProduction * (1 - usePercent) * customerFeedInTarrif);
 

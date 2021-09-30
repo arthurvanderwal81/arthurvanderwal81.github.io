@@ -330,6 +330,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus
     left: calc(-3 * var(--step-width));
 }
 
+.step-container.step-5 {
+    left: calc(-4 * var(--step-width));
+}
+
 .step-container .step {
     width: var(--step-width);
     height: 100%;

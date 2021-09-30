@@ -16,10 +16,10 @@
             {
                 const input = document.getElementsByName("address")[0];
                 const options = {
-                  componentRestrictions: { country: "au" },
-                  fields: ["address_components", "geometry", "icon", "name"],
-                  strictBounds: false,
-                  types: ["address"],
+                    componentRestrictions: { country: "au" },
+                    fields: ["address_components", "geometry", "icon", "name"],
+                    strictBounds: false,
+                    types: ["address"],
                 };
 
                 autocomplete = new google.maps.places.Autocomplete(input, options);
@@ -85,6 +85,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+
+                    <div class="step">
+                        <form id="form-step-3">
                             <div class="question">
                                 <h1>What time of day do you mostly use power?</h1>
                                 <div class="radio-button-container">
@@ -106,7 +111,7 @@
                     </div>
 
                     <div class="step">
-                        <form id="form-step-3">
+                        <form id="form-step-4">
                             <div class="question">
                                 <h1>What's your address?</h1>
                                 <p>Address</p>
@@ -118,7 +123,7 @@
                     </div>
 
                     <div class="step">
-                        <form id="form-step-4">
+                        <form id="form-step-5">
                             <h1>Confirm your details to instantly receive your Rebate & Potential Savings results!</h1>
 
                             <div class="details-form">
@@ -152,7 +157,7 @@
 
                     function updateProgress(step)
                     {
-                        let progress = (step - 1) * 25;
+                        let progress = (step - 1) * 20;
 
                         document.querySelector(".progress-bar").style.width = `${progress}%`;
                         document.querySelector("span[data-progress]").innerText = `${progress}%`;
@@ -222,8 +227,10 @@
                             return;
                         }
 
-                        if (currentStep + 1 > 4)
+                        if (currentStep + 1 > 5)
                         {
+                            this.disabled = true;
+
                             let searchParams = getSearchParams();
 
                             let formData = new FormData();
@@ -278,18 +285,18 @@
                                 .then(json => {
                                     console.log(json);
 
-                                    //window.top.location.href = "http://lp.instylesolar.com/calculator-thanks/?" + redirectParameters.join("&");
+                                    window.top.location.href = "http://lp.instylesolar.com/calculator-thanks/?" + redirectParameters.join("&");
                                 });
                         }
 
-                        currentStep = Math.min(4, currentStep + 1);
+                        currentStep = Math.min(5, currentStep + 1);
 
                         stepContainer.dataset.step = currentStep;
                         stepContainer.classList = `step-container step-${currentStep}`;
 
                         updateProgress(currentStep);
 
-                        if (currentStep == 4)
+                        if (currentStep == 5)
                         {
                             //document.querySelector("button.next-button").classList.add("v-hidden");
                         }

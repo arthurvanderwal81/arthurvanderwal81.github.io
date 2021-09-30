@@ -122,24 +122,14 @@
                             <h1>Confirm your details to instantly receive your Rebate & Potential Savings results!</h1>
 
                             <div class="details-form">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input type="text" placeholder="First Name" name="first-name" required />
-                                        </td>
-                                        <td>
-                                            <input type="text" placeholder="Last Name" name="last-name" required />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" placeholder="Phone Number" name="phone-number" required />
-                                        </td>
-                                        <td>
-                                            <input type="email" placeholder="Email address" name="email-address" required />
-                                        </td>
-                                    </tr>
-                                </table>
+                                <div class="flex-row">
+                                    <input type="text" placeholder="First Name" name="first-name" required />
+                                    <input type="text" placeholder="Last Name" name="last-name" required />
+                                </div>
+                                <div class="flex-row">
+                                    <input type="text" placeholder="Phone Number" name="phone-number" required />
+                                    <input type="email" placeholder="Email address" name="email-address" required />
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -237,7 +227,7 @@
                             let searchParams = getSearchParams();
 
                             let formData = new FormData();
-                            let copyParameters = ["utm_source", "utm_medium", "utm_campaign", "utm_campaign_id", "utm_content", "utm_ad_set_id", "utm_ad_id", "utm_term"];
+                            let copyParameters = ["utm_source", "utm_medium", "utm_campaign", "utm_campaign_id", "utm_content", "utm_ad_set_id", "utm_ad_id", "utm_term", "event_id"];
 
                             for (let i = 0; i < copyParameters.length; i++)
                             {
@@ -278,7 +268,8 @@
                             formData.append("first-name", document.querySelector("[name='first-name']").value);
                             formData.append("last-name", document.querySelector("[name='last-name']").value);
                             formData.append("phone-number", document.querySelector("[name='phone-number']").value);
-                            formData.append("email-addres", document.querySelector("[name='email-addres']").value);
+                            formData.append("email-addres", document.querySelector("[name='email-address']").value);
+                            formData.append("user-agent", navigator.userAgent);
                             //formData.append("ip-address", "<?= $_SERVER["REMOTE_ADDR"] ?>");
                             formData.append("ip-address", "127.0.0.1");
 

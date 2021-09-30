@@ -84,6 +84,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus
     visibility: hidden;
 }
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+}
+
 .container {
     width: 60%;
     height: 100%;
@@ -389,6 +396,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[name="address"]:focus
 }
 
 @media only screen and (max-width: 768px) {
+    .flex-row {
+        flex-direction: column;
+    }
+
     .container {
         width: auto;
 

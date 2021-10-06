@@ -47,6 +47,52 @@
         </script>
     </head>
     <body>
+        <template id="campaign-row-template">
+            <tr>
+                <td>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    </div>
+                </td>
+                <td data-value="name">
+                </td>
+                <td data-value="">
+                </td>
+                <td data-value="">
+                </td>
+                <td data-value="">
+                </td>
+                <td data-value="">
+                    —
+                </td>
+                <td data-value="">
+                    —
+                </td>
+                <td data-value="">
+                    —
+                </td>
+                <td data-value="">
+                    &infin;
+                </td>
+                <td data-value="">
+                </td>
+                <td data-value="">
+                </td>
+                <td data-value="">
+                    <span class="badge bg-warning">Waiting for data</span>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#budget-modal" data-target="">Duplicate</button>
+                </td>
+            </tr>
+        </template>
+
+        <template id="adset-row-template">
+        </template>
+
+        <template id="ad-row-template">
+        </template>
+
         <div class="modal fade" id="budget-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -104,15 +150,23 @@
 
                             let campaigns = await fbAPI.getCampaigns(this.value);
 
-                            let campaignRows = campaigns.map(c => {
-                                let row = document.createElement("tr");
-                                let cell = document.createElement("td");
+                            let campaignRows = campaigns.map(campaign => {
+                                let template = document.querySelector("template#campaign-row-template");
+                                let campaignRow = template.content.firstElementChild.cloneNode(true);
 
-                                cell.innerText = c.name;
+                                let keys = Object.keys(campaign);
 
-                                row.appendChild(cell);
+                                for (let i = 0; i < keys.length; i++)
+                                {
+                                    let keyValueElement = campaignRow.querySelector(`[data-value=${keys[i]}]`);
 
-                                return row;
+                                    if (keyValueElement != null)
+                                    {
+                                        keyValueElement.innerText = campaign[keys[i]];
+                                    }
+                                }
+
+                                return campaignRow;
                             });
 
                             document.querySelector("table tbody").replaceChildren(...campaignRows);

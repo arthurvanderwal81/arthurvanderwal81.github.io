@@ -22,7 +22,7 @@ class FacebookAPI
     {
         return new Promise((resolve, reject) => {
             FB.api(`/v12.0/${userID}/adaccounts/?fields=id,account_id,name`, function(adAccounts) {
-                console.log(response);
+                console.log(adAccounts);
 
                 resolve(adAccounts.data);
             });

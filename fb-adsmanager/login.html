@@ -27,6 +27,13 @@
                         //window.location.href = "index.html?id=" + response.authResponse.userID;
                         FB.api(`/v12.0/${response.authResponse.userID}/adaccounts`, function(response) {
                             console.log(response);
+
+                            for (let i = 0; i < response.data.length; i++)
+                            {
+                                FB.api(`/v12.0/${response.data[i].id}/?fields=id,account_id,name`, function(adAccountDetails) {
+                                    console.log(adAccountDetails.name);
+                                });
+                            }
                         });
                     }
                     else

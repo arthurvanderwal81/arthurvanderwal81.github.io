@@ -90,7 +90,7 @@
             </div>
             <div class="row my-3">
                 <div class="col">
-                    <select class="form-select">
+                    <select class="form-select" name="ad-account-selector">
                         <option>Ad Account #1 (213123131225544)</option>
                         <option>Ad Account #2 (213123111125544)</option>
                         <option>Ad Account #3 (213123666254544)</option>
@@ -481,6 +481,16 @@
                         let fbAPI = new FacebookAPI();
 
                         let adAccounts = await fbAPI.getAdAccounts(response.authResponse.userID);
+
+                        let adAccountOptions = adAccounts.map(a => {
+                            let option = document.createElement("option");
+                            option.value = a.id;
+                            option.text = a.name;
+
+                            return option;
+                        });
+
+                        document.querySelector("select[name='ad-account-selector']").replaceChildren(...adAccountOptions);
                     }
                 });
             };

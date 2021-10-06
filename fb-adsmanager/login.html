@@ -10,21 +10,37 @@
                     appId            : "866162584087713",
                     autoLogAppEvents : true,
                     xfbml            : true,
-                    version          : 'v12.0'
+                    version          : "v12.0"
                 });
+
                 FB.getLoginStatus(function(response) {
                     console.log(response);
-                });
-                FB.login(function(response) {
-                    if (response.authResponse) {
-                     console.log('Welcome!  Fetching your information.... ');
-                     FB.api('/me', function(response) {
-                       console.log('Good to see you, ' + response.name + '.', response);
-                     });
-                    } else {
-                     console.log('User cancelled login or did not fully authorize.');
+
+                    if (response.status === "connected")
+                    {
+                        FB.api("/me", function(response) {
+                            console.log("Good to see you, " + response.name + ".", response);
+                        });
+                    }
+                    else
+                    {
+                        FB.login(function(response) {
+                            if (response.authResponse)
+                            {
+                                console.log("Welcome!  Fetching your information.... ");
+
+                                FB.api("/me", function(response) {
+                                    console.log("Good to see you, " + response.name + ".", response);
+                                });
+                            }
+                            else
+                            {
+                                console.log("User cancelled login or did not fully authorize.");
+                            }
+                        });
                     }
                 });
+
             };
         </script>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>

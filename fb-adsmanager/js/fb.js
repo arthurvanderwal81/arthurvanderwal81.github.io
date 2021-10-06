@@ -14,8 +14,9 @@ class FacebookAPI
             FB.api(`/v12.0/${adAccountId}/campaigns/?fields=${FacebookAPI.__campaignFields.join(",")}`, function(campaigns) {
                 console.log(campaigns);
 
-                let insights = await this.getCampaignInsights(campaigns[0].id);
-                console.log(insights);
+                this.getCampaignInsights(campaigns[0].id).then(insights => {
+                    console.log(insights);
+                });
 
                 resolve(campaigns.data);
             });
@@ -25,10 +26,10 @@ class FacebookAPI
     getCampaignInsights(campaignId)
     {
         return new Promise((resolve, reject) => {
-            FB.api(`/v12.0/${campaignId}/insights`, function(campaigns) {
-                console.log(campaigns);
+            FB.api(`/v12.0/${campaignId}/insights`, function(insights) {
+                console.log(insights);
 
-                resolve(campaigns.data);
+                resolve(insights.data);
             });
         });
 

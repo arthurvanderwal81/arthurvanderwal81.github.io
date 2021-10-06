@@ -10,7 +10,7 @@ class FacebookAPI
     getCampaigns(adAccountId)
     {
         return new Promise((resolve, reject) => {
-            FB.api(`/v12.0/${adAccountId}/campaigns/?fields=${Facebook.campaignFields.join(",")}`, function(campaigns) {
+            FB.api(`/v12.0/${adAccountId}/campaigns/?fields=${FacebookAPI.campaignFields.join(",")}`, function(campaigns) {
                 console.log(campaigns);
 
                 resolve(campaigns.data);

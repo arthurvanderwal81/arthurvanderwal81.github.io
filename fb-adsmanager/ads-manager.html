@@ -504,6 +504,8 @@
 
                         document.querySelector("select[name='ad-account-selector']").replaceChildren(...adAccountOptions);
                         document.querySelector("select[name='ad-account-selector']").disabled = false;
+
+                        document.querySelector("select[name='ad-account-selector']").dispatchEvent(new Event("input"));
                     }
                 });
             };

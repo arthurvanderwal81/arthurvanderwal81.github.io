@@ -5,6 +5,10 @@
         <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true"></div>
 
         <script>
+
+            // https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/#fields
+            let campaignFields = ["id", "account_id", "ad_strategy_id", "adlabels", "bid_strategy", "boosted_object_id", "brand_lift_studies", "budget_rebalance_flag", "budget_remaining", "buying_type", "can_create_brand_lift_study", "can_use_spend_cap", "configured_status", "created_time", "daily_budget", "effective_status", "is_skadnetwork_attribution", "issues_info", "last_budget_toggling_time", "lifetime_budget", "name", "objective", "pacing_type", "promoted_object", "recommendations", "smart_promotion_type", "source_campaign", "source_campaign_id", "special_ad_categories", "special_ad_category", "special_ad_category_country", "spend_cap", "start_time", "status", "stop_time", "topline_id", "updated_time"];
+
             window.fbAsyncInit = function() {
                 FB.init({
                     appId            : "866162584087713",
@@ -30,7 +34,7 @@
 
                             for (let i = 0; i < response.data.length; i++)
                             {
-                                FB.api(`/v12.0/${response.data[i].id}/campaigns/?fields=all`, function(campaigns) {
+                                FB.api(`/v12.0/${response.data[i].id}/campaigns/?fields=${campaignFields.join(",")}`, function(campaigns) {
                                     console.log(campaigns);
                                 });
                             }

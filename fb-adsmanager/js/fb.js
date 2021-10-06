@@ -14,10 +14,6 @@ class FacebookAPI
             FB.api(`/v12.0/${adAccountId}/campaigns/?fields=${FacebookAPI.__campaignFields.join(",")}`, function(campaigns) {
                 console.log(campaigns);
 
-                this.getCampaignInsights(campaigns.data[0].id).then(insights => {
-                    console.log(insights);
-                });
-
                 resolve(campaigns.data);
             });
         });
@@ -32,7 +28,6 @@ class FacebookAPI
                 resolve(insights.data);
             });
         });
-
     }
 
     getAdAccounts(userID)

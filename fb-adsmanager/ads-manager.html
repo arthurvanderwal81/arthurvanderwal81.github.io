@@ -482,10 +482,10 @@
 
                         let adAccounts = await fbAPI.getAdAccounts(response.authResponse.userID);
 
-                        let adAccountOptions = adAccounts.map(a => {
+                        let adAccountOptions = adAccounts.map(account => {
                             let option = document.createElement("option");
-                            option.value = a.id;
-                            option.text = `${a.name} (${account.account_id})`;
+                            option.value = account.id;
+                            option.text = `${account.name} (${account.account_id})`;
 
                             return option;
                         });

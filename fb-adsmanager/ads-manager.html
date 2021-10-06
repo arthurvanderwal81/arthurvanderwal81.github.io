@@ -40,6 +40,11 @@
                 z-index: -1;
             }
         </style>
+
+        <script type="text/javascript" src="js/fb.js"></script>
+        <script type="text/javascript">
+            let fbAPI = new FacebookAPI();
+        </script>
     </head>
     <body>
         <div class="modal fade" id="budget-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,20 +95,29 @@
             </div>
             <div class="row my-3">
                 <div class="col">
-                    <select class="form-select" name="ad-account-selector">
-                        <option>Ad Account #1 (213123131225544)</option>
-                        <option>Ad Account #2 (213123111125544)</option>
-                        <option>Ad Account #3 (213123666254544)</option>
-                        <option>Ad Account #4 (213123111225544)</option>
+                    <select class="form-select" name="ad-account-selector" disabled>
                     </select>
 
                     <script type="text/javascript">
-                        document.querySelector("select").addEventListener("input", function(e) {
+                        document.querySelector("select").addEventListener("input", async function(e) {
                             document.querySelector(".loading-overlay").classList.remove("hidden");
 
-                            setTimeout(function() {
-                                document.querySelector(".loading-overlay").classList.add("hidden");
-                            }, 2000);
+                            let campaigns = await fbAPI.getCampaigns(this.value);
+
+                            let campaignRows = campaigns.map(c => {
+                                let row = document.createElement("tr");
+                                let cell = document.createElement("td");
+
+                                cell.innerText = c.name;
+
+                                row.appendChild(cell);
+
+                                return row;
+                            });
+
+                            document.querySelector("table tbody").replaceChildren(...campaignRows);
+
+                            document.querySelector(".loading-overlay").classList.add("hidden");
                         });
                     </script>
                 </div>
@@ -478,8 +492,6 @@
 
                     if (response.status === "connected")
                     {
-                        let fbAPI = new FacebookAPI();
-
                         let adAccounts = await fbAPI.getAdAccounts(response.authResponse.userID);
 
                         let adAccountOptions = adAccounts.map(account => {
@@ -491,13 +503,13 @@
                         });
 
                         document.querySelector("select[name='ad-account-selector']").replaceChildren(...adAccountOptions);
+                        document.querySelector("select[name='ad-account-selector']").disabled = false;
                     }
                 });
             };
 
         </script>
 
-        <script type="text/javascript" src="js/fb.js"></script>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     </body>
 </html>

@@ -485,7 +485,7 @@
                         let adAccountOptions = adAccounts.map(a => {
                             let option = document.createElement("option");
                             option.value = a.id;
-                            option.text = a.name;
+                            option.text = `${a.name} (${account.account_id})`;
 
                             return option;
                         });

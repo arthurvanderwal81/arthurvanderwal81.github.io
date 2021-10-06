@@ -464,6 +464,30 @@
             }, 2000);
 
             refreshData();
+
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId            : "866162584087713",
+                    autoLogAppEvents : true,
+                    xfbml            : true,
+                    version          : "v12.0"
+                });
+
+                FB.getLoginStatus(async function(response) {
+                    console.log(response);
+
+                    if (response.status === "connected")
+                    {
+                        let fbAPI = new FacebookAPI();
+
+                        let adAccounts = await fbAPI.getAdAccounts(response.authResponse.userID);
+                    }
+                });
+            };
+
         </script>
+
+        <script type="text/javascript" src="js/fb.js"></script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     </body>
 </html>

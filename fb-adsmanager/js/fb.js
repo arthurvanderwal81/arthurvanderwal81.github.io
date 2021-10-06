@@ -14,7 +14,7 @@ class FacebookAPI
             FB.api(`/v12.0/${adAccountId}/campaigns/?fields=${FacebookAPI.__campaignFields.join(",")}`, function(campaigns) {
                 console.log(campaigns);
 
-                this.getCampaignInsights(campaigns[0].id).then(insights => {
+                this.getCampaignInsights(campaigns.data[0].id).then(insights => {
                     console.log(insights);
                 });
 

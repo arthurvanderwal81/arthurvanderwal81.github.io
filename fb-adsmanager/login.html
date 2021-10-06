@@ -24,7 +24,10 @@
                             console.log("Good to see you, " + response.name + ".", response);
                         });
 
-                        window.location.href = "index.html?id=" + response.authResponse.userID;
+                        //window.location.href = "index.html?id=" + response.authResponse.userID;
+                        FB.api(`/v12.0/${response.authResponse.userID}/adaccounts`, function(response) {
+                            console.log(response);
+                        });
                     }
                     else
                     {

@@ -30,7 +30,7 @@
 
                             for (let i = 0; i < response.data.length; i++)
                             {
-                                FB.api(`/v12.0/${response.data[i].id}/campaigns`, function(campaigns) {
+                                FB.api(`/v12.0/${response.data[i].id}/campaigns/?fields=all`, function(campaigns) {
                                     console.log(campaigns);
                                 });
                             }
